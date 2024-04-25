@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultado da Conversão</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #24423C; /* Alteração da cor de fundo para azul claro */
+            color: #FFB612; /* Cor do texto */
+            font-family: Arial, sans-serif; /* Fonte do texto */
+        }
+        .content {
+            text-align: center;
+        }
+        .content h1 {
+            margin-top: 20px;
+            font-size: 2em;
+        }
+        .content p {
+            margin-bottom: 20px;
+        }
+        .content a {
+            display: inline-block;
+            padding: 10px 20px;
+            text-decoration: none;
+            background-color: #fff;
+            color: #333;
+            border: 5px solid #FFB612;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .content a:hover {
+            background-color: #ddd; 
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Resultado</h1>
+        <p>{{ '%.2f' | format(value) }} {{ from_unit }} é igual a {{ '%.2f' | format(result) }} {{ to_unit }}.</p>
+
+
+        <a href="/">Voltar</a>
+    </div>
+</body>
+</html>

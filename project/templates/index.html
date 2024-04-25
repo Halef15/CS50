@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Conversor de Unidades de Medida</title>
+    <style>
+       {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #24423C;
+            color:  #FFB612;
+        }
+
+        h1 {
+            margin-top: 20px;
+            font-size: 2em;
+            text-align: center;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"],
+        select {
+            padding: 8px;
+            margin: 5px 0;
+            width: 200px;
+            border-radius: 5px;
+            border: 5px solid #FFB612;
+        }
+
+        .unit-labels {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .unit-selectors {
+            display: flex;
+            justify-content: space-around;
+            width: 45%;
+        }
+
+        .unit-selectors select {
+            flex: 1;
+            margin: 5px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .buttons input {
+            padding: 10px 20px;
+            border: 5px solid  #FFB612;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+            background-color: #fff; /* Fundo branco */
+            color:  #000; /* Cor do texto preto */
+        }
+
+        .buttons input:hover {
+            background-color: #ddd;
+        }
+
+        #result {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function toggleUnits() {
+            const fromUnit = document.getElementById('from_unit');
+            const toUnit = document.getElementById('to_unit');
+            const resultSpan = document.getElementById('conversion_result');
+
+            const volumeUnits = ['liter', 'ml', 'kg'];
+            const imperialUnits = ['inch', 'foot', 'yard', 'mile'];
+            const metricUnits = ['meter', 'centimeter', 'kilometer'];
+            const weightUnits = ['pound', 'ounce'];
+
+            const fromIsVolume = volumeUnits.includes(fromUnit.value);
+            const toIsVolume = volumeUnits.includes(toUnit.value);
+            const fromIsImperial = imperialUnits.includes(fromUnit.value);
+            const toIsImperial = imperialUnits.includes(toUnit.value);
+            const fromIsMetric = metricUnits.includes(fromUnit.value);
+            const toIsMetric = metricUnits.includes(toUnit.value);
+            const fromIsWeight = weightUnits.includes(fromUnit.value);
+            const toIsWeight = weightUnits.includes(toUnit.value);
+
+            if (
+                (fromIsVolume && toIsImperial) ||
+                (fromIsVolume && toIsMetric) ||
+                (fromIsWeight && toIsMetric) ||
+                (fromIsWeight && toIsVolume) ||
+                (fromIsWeight && toIsImperial)
+            ) {
+                alert('Conversão inválida');
+                // Revertendo a seleção para evitar a conversão inválida
+                fromUnit.value = 'inch';
+                resultSpan.textContent = '';
+            } else {
+                const fromOptions = Array.from(fromUnit.options);
+                const toOptions = Array.from(toUnit.options);
+
+                const tempOptionsFrom = fromOptions.map(option => ({ text: option.text, value: option.value }));
+                const tempOptionsTo = toOptions.map(option => ({ text: option.text, value: option.value }));
+
+                fromUnit.innerHTML = '';
+                toUnit.innerHTML = '';
+
+                tempOptionsTo.forEach(option => {
+                    fromUnit.appendChild(new Option(option.text, option.value));
+                });
+
+                tempOptionsFrom.forEach(option => {
+                    toUnit.appendChild(new Option(option.text, option.value));
+                });
+
+                resultSpan.textContent = ''; // Limpar o resultado ao trocar as unidades
+            }
+        }
+
+        function validateForm(event) {
+            const valueInput = document.getElementById('value');
+
+            if (valueInput.value.trim() === '') {
+                event.preventDefault(); // Impede o envio do formulário se o campo estiver vazio
+                alert('Por favor, insira um valor antes de converter.');
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Conversor de Unidades de Medida</h1>
+    <form action="/converter" method="post" onsubmit="validateForm(event)">
+        <label for="value">Valor:</label>
+        <input type="number" step="any" id="value" name="value">
+        <br>
+        <div class="unit-labels">
+            <label>De:</label>
+            <div class="unit-selectors">
+                <select id="from_unit" name="from_unit">
+                    <option value="inch">Polegadas</option>
+                    <option value="foot">Pés</option>
+                    <option value="yard">Jardas</option>
+                    <option value="mile">Milhas</option>
+                    <option value="pound">Pound</option>
+                    <option value="ounce">Onças</option>
+                </select>
+            </div>
+            <label>Para:</label>
+            <div class="unit-selectors">
+                <select id="to_unit" name="to_unit">
+                    <option value="meter">Metros</option>
+                    <option value="centimeter">Centimetros</option>
+                    <option value="kilometer">Quilometros</option>
+                    <option value="ml">ML</option>
+                    <option value="liter">Litros</option>
+                    <option value="kg">KG</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="buttons">
+            <input type="button" value="Trocar" onclick="toggleUnits()">
+            <input type="submit" value="Converter">
+        </div>
+    </form>
+</body>
+</html>

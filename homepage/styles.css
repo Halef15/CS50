@@ -1,0 +1,27 @@
+< !DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Biography of Shrek</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"><style>body {
+    background-color: #6B8E23;
+    /* Cor verde musgo para o fundo */
+    color: #8B4513;
+    /* Cor marrom para o texto */
+    font-size: 18px;
+    /* Tamanho padrão da fonte */
+}
+
+h1 {
+    font-size: 32px;
+    /* Tamanho da fonte para o título */
+}
+
+p {
+    font-size: 20px;
+    /* Tamanho da fonte para os parágrafos */
+}
+
+</style></head><body><nav class="navbar navbar-expand-lg navbar-light bg-light">< !-- Conteúdo do navbar --></nav><div class="container mt-4"><h1>Biography of Shrek</h1><img src="https://exemplo.com/imagem-do-shrek.jpg" alt="Shrek Image" class="img-fluid"><p>Hi,
+I'm Shrek! I' m a fictional ogre character created by William Steig. I'm the main protagonist of the DreamWorks animated film series of the same name.</p>
+ <p>I live in a swamp,
+but I've found true happiness after meeting and marrying Princess Fiona. You might know me for my sarcasm, humor, and my layers, much like an onion.</p>
+ <p>Despite my grumpy exterior,
+I like to believe that I have a heart of gold,
+and I've somehow managed to endear myself to audiences worldwide.</p>
+ <a href="curiosities.html" class="btn btn-primary">Check out Curiosities</a></div><script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script><script src="scripts.js"></script></body></html>

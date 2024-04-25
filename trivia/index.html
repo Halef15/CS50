@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script>
+            window.onload = function() {
+                const correctAnswer = 'Green Bay Packers';
+
+                const buttons = document.getElementsByTagName('button');
+
+                for (let i = 0; i < buttons.length; i++) {
+                    buttons[i].addEventListener('click', event => {
+                        const selectedAnswer = event.target.textContent.trim();
+                        const isCorrect = selectedAnswer === correctAnswer;
+
+                        if (isCorrect) {
+                            event.target.style.backgroundColor = 'green';
+                            document.querySelector('.section').insertAdjacentHTML('beforeend', '<p>Correct</p>');
+                        } else {
+                            event.target.style.backgroundColor = 'red';
+                            document.querySelector('.section').insertAdjacentHTML('beforeend', '<p>Incorrect</p>');
+                        }
+                    });
+                }
+
+                const submitButton = document.getElementById('submit-button');
+                const answerInput = document.getElementById('text-answer');
+
+                submitButton.addEventListener('click', event => {
+                    const userAnswer = answerInput.value.toLowerCase();
+                    const secondQuestion = document.querySelector('#second-question');
+
+                    if (userAnswer === 'pq são') {
+                        answerInput.style.backgroundColor = 'green';
+                        secondQuestion.insertAdjacentHTML('afterend', '<p>Correct!</p>');
+                    } else {
+                        answerInput.style.backgroundColor = 'red';
+                        secondQuestion.insertAdjacentHTML('afterend', '<p>Incorrect!</p>');
+                    }
+                });
+            };
+        </script>
+    </head>
+
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multipla escolha</h2>
+                <hr>
+                <h3>Qual o time mais vencedor de Super Bowls da NFL?</h3>
+                <button class="button-1" data-answer="Pittsburgh Steelers">Pittsburgh Steelers</button>
+                <button class="button-2" data-answer="São Francisco 49ers">São Francisco 49ers</button>
+                <button class="button-3" data-answer="Green Bay Packers">Green Bay Packers</button>
+                <button class="button-4" data-answer="New England Patriots">New England Patriots</button>
+
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Resposta livre</h2>
+                <hr>
+                <h3 id="second-question">Qual o motivo da Pereiro ter dedos tortos?</h3>
+                <input type="text" id="text-answer">
+                <button id="submit-button">Confirmar resposta</button>
+
+            </div>
+        </div>
+    </body>
+
+</html>
